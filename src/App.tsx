@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 function App() {
   return (
-    <div className="App text-9xl" data-testid="App">
+    <div className="App" data-testid="App">
       Hello
     </div>
   );
