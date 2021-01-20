@@ -4,6 +4,9 @@ import './dashboardContainer.styles.scss';
 interface DashboardContainerProps {}
 
 const DashboardContainer: React.FC<DashboardContainerProps> = () => {
+  // useEffect(() => {
+  //   fetchData().then((res) => console.log(res));
+  // }, []);
   return (
     <div className="dashboard-container">
       <div className="dashboard-container-1">1</div>
