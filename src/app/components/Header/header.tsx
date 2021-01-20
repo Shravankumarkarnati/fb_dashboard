@@ -8,4 +8,5 @@ const Header: React.FC<HeaderProps> = () => (
     <h1 className="header-heading">Dashboard</h1>
   </header>
 );
+
 export default Header;

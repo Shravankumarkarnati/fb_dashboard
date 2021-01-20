@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'plugin:prettier/recommended',
     'prettier',
     'prettier/react',
     'prettier/@typescript-eslint',
@@ -29,7 +30,7 @@ module.exports = {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': ['error', 'never'],
-    'max-len': 80,
+    'max-len': ['error', { code: 80, comments: 65 }],
   },
   settings: {
     'import/resolver': {
