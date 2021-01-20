@@ -30,7 +30,10 @@ module.exports = {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'import/extensions': ['error', 'never'],
-    'max-len': ['error', { code: 80, comments: 65 }],
+    'max-len': [
+      'error',
+      { code: 80, comments: 65, ignorePattern: '^import .*' },
+    ],
   },
   settings: {
     'import/resolver': {

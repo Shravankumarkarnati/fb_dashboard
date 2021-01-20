@@ -1,5 +1,5 @@
 .header {
-  @apply flex-1 bg-blue-700 p-4;
+  @apply bg-blue-700 p-4;
   &-heading {
     @apply text-xl text-white font-bold cursor-pointer uppercase tracking-wide;
   }

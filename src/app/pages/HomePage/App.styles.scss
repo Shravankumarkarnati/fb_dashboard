@@ -1,0 +1,6 @@
+.App {
+  @apply w-full h-full flex;
+  &-container {
+    @apply flex-1 flex flex-col;
+  }
+}
