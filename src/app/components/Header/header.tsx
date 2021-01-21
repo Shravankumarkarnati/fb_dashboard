@@ -5,7 +5,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => (
   <header className="header" data-testid="Header">
-    <h1 className="header-heading">Dashboard</h1>
+    <h1 className="header-heading">Facebook Dashboard</h1>
   </header>
 );
 

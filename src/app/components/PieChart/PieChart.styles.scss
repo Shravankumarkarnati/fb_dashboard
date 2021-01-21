@@ -1,0 +1,8 @@
+.PieChart {
+  &-OF {
+    &--title {
+      text-anchor: middle;
+      @apply font-bold tracking-wide;
+    }
+  }
+}
