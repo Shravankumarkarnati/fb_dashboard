@@ -20,6 +20,6 @@
 .dashboard-container {
   @apply flex-1 flex flex-col;
   & div {
-    @apply flex-1;
+    @apply flex-1 flex;
   }
 }

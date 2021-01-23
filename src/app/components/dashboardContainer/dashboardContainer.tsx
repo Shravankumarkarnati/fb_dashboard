@@ -4,6 +4,7 @@ import AppContext, {
   stockDataType,
 } from '../../utils/context';
 import fetchData from '../../utils/fetchData';
+import BarGraph from '../BarGraph/BarGraph';
 import PieChart from '../PieChart/PieChart';
 import './dashboardContainer.styles.scss';
 
@@ -25,8 +26,9 @@ const DashboardContainer: React.FC<DashboardContainerProps> = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-container-1">
+      <div className="dashboard-container--1">
         <PieChart />
+        <BarGraph />
       </div>
       {/* <div className="dashboard-container-2">2</div>
       <div className="dashboard-container-3">3</div>
