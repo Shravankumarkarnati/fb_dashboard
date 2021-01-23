@@ -30,7 +30,7 @@ const PieChart: React.FC<PieChartProps> = () => {
 
   const toolTipFunction = (d: dataType) => (
     <div className="PieChart-OF--toolTip">
-      <p className="text-lg font-bold ">{d.number}</p>
+      <p className="text-lg font-bold bg-red-500">{d.number}</p>
     </div>
   );
 
@@ -51,7 +51,7 @@ const PieChart: React.FC<PieChartProps> = () => {
         pieceHoverAnnotation
       />
       <div className="PieChart-summary">
-        <p>PieChart: Distribution of Type of Data Posted on the page</p>
+        <p>PieChart: Distribution of Type of Post Posted on the page</p>
       </div>
     </div>
   );
