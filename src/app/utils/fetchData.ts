@@ -13,11 +13,12 @@ const parseCSVGist = (
   for (let i = 1; i < lines.length; i += 1) {
     const obj: any = {};
     const currentline = lines[i].split(separator);
-
-    for (let j = 0; j < headers.length; j += 1) {
-      obj[headers[j]] = currentline[j];
+    if (currentline[0].length) {
+      for (let j = 0; j < headers.length; j += 1) {
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
     }
-    result.push(obj);
   }
   return result;
 };
