@@ -1,0 +1,8 @@
+.PieChart {
+  width: 600px;
+  @apply flex flex-col items-center justify-center  
+  border-4 border-gray-700 shadow-lg rounded-md;
+  &-summary {
+    @apply font-semibold text-lg capitalize;
+  }
+}
