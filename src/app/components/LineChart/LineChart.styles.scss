@@ -1,0 +1,15 @@
+.LineChart {
+  width: 600px;
+  @apply flex flex-col items-center justify-center  
+      border-4 border-gray-700 shadow-lg rounded-md;
+  &-summary {
+    @apply font-semibold text-lg capitalize;
+  }
+  &-OF {
+    &--label {
+      @apply text-sm font-semibold;
+      text-anchor: middle;
+      transform: rotate(-55deg) translate(-10px);
+    }
+  }
+}

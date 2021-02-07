@@ -1,4 +1,3 @@
-import distinctColors from 'distinct-colors';
 import React from 'react';
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame';
 import groupData, { dataType } from './PieChart.d3';
@@ -14,15 +13,7 @@ const PieChart: React.FC<PieChartProps> = () => {
   const ordinalValue = 'type';
   const rangeValue = 'number';
 
-  const colorPallate = distinctColors({
-    count: data.length,
-    hueMin: 35,
-    hueMax: 300,
-    lightMin: 30,
-    lightMax: 90,
-    chromaMin: 40,
-    chromaMax: 68,
-  }).map((cur) => `rgba(${cur.rgba()})`);
+  const colorPallate = ['#003f5c', '#7a5195', '#ef5675', '#ffa600'];
 
   const getColor = (d: any, i: number) => {
     return { fill: colorPallate[i] };

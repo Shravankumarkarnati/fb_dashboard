@@ -5,6 +5,7 @@ import AppContext, {
 } from '../../utils/context';
 import fetchData from '../../utils/fetchData';
 import BarGraph from '../BarGraph/BarGraph';
+import LineChart from '../LineChart/LineChart';
 import PieChart from '../PieChart/PieChart';
 import './dashboardContainer.styles.scss';
 
@@ -32,7 +33,8 @@ const DashboardContainer: React.FC<DashboardContainerProps> = () => {
       </div>
       {/* <div className="dashboard-container-2">2</div>
       <div className="dashboard-container-3">3</div>
-      <div className="dashboard-container-4">4</div> */}
+    <div className="dashboard-container-4">4</div> */}
+      <LineChart />
     </div>
   );
 };

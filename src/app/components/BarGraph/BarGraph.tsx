@@ -1,4 +1,3 @@
-import distinctColors from 'distinct-colors';
 import React from 'react';
 import OrdinalFrame from 'semiotic/lib/OrdinalFrame';
 import groupDataPostMonth, { dataType } from './BarGraph.d3';
@@ -14,15 +13,20 @@ const BarGraph: React.FC<BarGraphProps> = () => {
   const ordinalValue = 'type';
   const rangeValue = 'number';
 
-  const colorPallate = distinctColors({
-    count: data.length,
-    hueMin: 35,
-    hueMax: 300,
-    lightMin: 30,
-    lightMax: 90,
-    chromaMin: 40,
-    chromaMax: 68,
-  }).map((cur) => `rgba(${cur.rgba()})`);
+  const colorPallate = [
+    '#00876c',
+    '#3d9a70',
+    '#64ad73',
+    '#89bf77',
+    '#afd17c',
+    '#d6e184',
+    '#fdd576',
+    '#fbb862',
+    '#f59b56',
+    '#ee7d4f',
+    '#e35e4e',
+    '#d43d51',
+  ];
 
   const getColor = (d: any, i: number) => {
     return { fill: colorPallate[i] };
