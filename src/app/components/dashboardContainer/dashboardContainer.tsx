@@ -4,7 +4,6 @@ import AppContext, {
   stockDataType,
 } from '../../utils/context';
 import fetchData from '../../utils/fetchData';
-// import Legend from '../Legend/Legend';
 import PieChartD3 from '../PieChart/d3/PieChart';
 import './dashboardContainer.styles.scss';
 
@@ -13,6 +12,7 @@ interface DashboardContainerProps {}
 const DashboardContainer: React.FC<DashboardContainerProps> = () => {
   const { changeContext } = useContext(AppContext);
   const [dataset, changeDataset] = useState(true);
+  const [theme, setTheme] = useState<Boolean>(true);
   const d1 = [
     { name: 'Photo', value: 426 },
     { name: 'Status', value: 45 },
@@ -45,11 +45,12 @@ const DashboardContainer: React.FC<DashboardContainerProps> = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-container--1">
-        <PieChartD3 data={dataset ? d1 : d2} />
-      </div>
+      <PieChartD3 data={dataset ? d1 : d2} theme={theme ? 'dark' : 'light'} />
       <button type="button" onClick={changeData}>
         Change Data
+      </button>
+      <button type="button" onClick={() => setTheme(!theme)}>
+        Change Theme
       </button>
     </div>
   );

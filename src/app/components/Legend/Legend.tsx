@@ -6,13 +6,18 @@ interface LegendProps {
   colors: string[];
   height?: number;
   width?: number;
+  horizontal?: Boolean;
+  theme?: 'dark' | 'light';
 }
 
 interface LegendContainerProps {
   horizontal: Boolean;
 }
 
-interface SingleLegendStyledProps {}
+interface SingleLegendContainerProps {
+  horizontal?: Boolean;
+  theme?: 'dark' | 'light';
+}
 
 interface SingleLegendProps {
   color: string;
@@ -20,6 +25,8 @@ interface SingleLegendProps {
   height: number;
   width: number;
   text: string;
+  horizontal?: Boolean;
+  theme?: 'dark' | 'light';
 }
 
 const LegendContainer = styled.ul<LegendContainerProps>`
@@ -27,27 +34,32 @@ const LegendContainer = styled.ul<LegendContainerProps>`
   list-style-type: none;
   text-align: left;
 
+  padding: 1rem 2rem;
+
   ${({ horizontal }) =>
     horizontal &&
     `
     display:flex;
     align-items:center;
     justify-content:center;
+
   `}
 `;
 
-const SingleLegendStyled = styled.li<SingleLegendStyledProps>`
+const SingleLegendContainer = styled.li<SingleLegendContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: start;
+  margin-right: ${(props) => (props.horizontal ? '1rem' : '0rem')};
 
   & svg {
-    margin-right: 1rem;
+    margin-right: ${(props) => (props.horizontal ? '.2rem' : '1rem')};
   }
 
   & p {
-    font-weight: bold;
+    font-weight: 500;
+    color: ${(props) => (props.theme === 'light' ? 'black' : 'white')};
   }
 `;
 
@@ -56,14 +68,16 @@ const SingleLegend: React.FC<SingleLegendProps> = ({
   height,
   width,
   text,
+  horizontal = false,
+  theme = 'light',
 }) => {
   return (
-    <SingleLegendStyled>
+    <SingleLegendContainer horizontal={horizontal} theme={theme}>
       <svg height={height} width={width}>
         <rect height={height} width={width} fill={color} />
       </svg>
       <p>{text}</p>
-    </SingleLegendStyled>
+    </SingleLegendContainer>
   );
 };
 
@@ -72,9 +86,11 @@ const Legend: React.FC<LegendProps> = ({
   colors,
   height = 10,
   width = 10,
+  horizontal = false,
+  theme = 'light',
 }) => {
   return (
-    <LegendContainer horizontal={false}>
+    <LegendContainer horizontal={horizontal}>
       {labels.map((cur, index) => (
         <SingleLegend
           height={height}
@@ -82,6 +98,8 @@ const Legend: React.FC<LegendProps> = ({
           color={colors[index]}
           text={cur}
           key={cur}
+          horizontal={horizontal}
+          theme={theme}
         />
       ))}
     </LegendContainer>

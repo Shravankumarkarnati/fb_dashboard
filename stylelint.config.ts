@@ -1,5 +1,10 @@
 module.exports = {
-  extends: ['stylelint-config-standard'],
+  extends: [
+    'stylelint-config-standard',
+    'stylelint-config-recommended',
+    'stylelint-config-styled-components',
+  ],
+  processors: ['stylelint-processor-styled-components'],
   rules: {
     'at-rule-no-unknown': [
       true,

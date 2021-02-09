@@ -1,8 +1,11 @@
 import { arc, pie, PieArcDatum, select } from 'd3';
 import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PieChartLegendSingle, { PieChartD3Props } from './PieChart.utils';
+import { PieChartD3Props } from './PieChart.utils';
 import './PiChart.d3.styles.scss';
+import Legend from '../../Legend/Legend';
+import Title from '../../Title';
+import Summary from '../../Summary';
 
 const PieChartD3: React.FC<PieChartD3Props> = ({
   data,
@@ -11,6 +14,7 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
   outerRadius = 200,
   innerRadius = 0,
   theme = 'light',
+  legend = true,
 }) => {
   const [primaryColor, secondaryColor] =
     theme === 'light' ? ['black', 'white'] : ['white', 'black'];
@@ -113,19 +117,16 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
     <div className="PieChartd3" style={{ backgroundColor: secondaryColor }}>
       <div className="inner-container">
         <svg className="svg" ref={pieChartSvgRef} />
-      </div>
-      <ul className="PieChart-legend">
-        {data.map((cur, index) => (
-          <PieChartLegendSingle
-            height={10}
-            width={10}
-            color={colorPallate[index]}
-            shape="square"
-            text={cur.name}
-            key={cur.name}
+        {legend && (
+          <Legend
+            theme={theme}
+            colors={colorPallate}
+            labels={data.map((cur) => cur.name)}
           />
-        ))}
-      </ul>
+        )}
+      </div>
+      <Title theme={theme} text="Pie Chart" />
+      <Summary theme={theme} text="Shravan Kumar Karnati" />
     </div>
   );
 };

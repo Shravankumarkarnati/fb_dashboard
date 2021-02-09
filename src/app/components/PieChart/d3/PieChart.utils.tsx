@@ -11,6 +11,7 @@ export interface PieChartD3Props {
   outerRadius?: number;
   innerRadius?: number;
   theme?: 'dark' | 'light';
+  legend?: Boolean;
 }
 
 interface PieChartLegendSingleProps {

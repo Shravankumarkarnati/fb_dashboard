@@ -1,12 +1,8 @@
 .PieChartd3 {
-  @apply flex flex-col items-center justify-center;
-  @apply w-full h-full border-4 border-black;
-
+  @apply flex border-2 border-black flex-col items-center justify-center;
   .inner-container {
-    @apply flex flex-col items-center justify-center;
-    @apply w-full h-full;
+    @apply flex;
   }
   .PieChart-legend {
-    @apply text-left list-none;
   }
 }
