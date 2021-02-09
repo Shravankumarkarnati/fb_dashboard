@@ -1,0 +1,11 @@
+.singleLegend {
+  @apply flex items-center justify-start;
+
+  &-svg {
+    @apply mr-2;
+  }
+
+  &-text {
+    @apply font-bold;
+  }
+}
