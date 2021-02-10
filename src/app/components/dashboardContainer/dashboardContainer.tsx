@@ -12,7 +12,7 @@ interface DashboardContainerProps {}
 const DashboardContainer: React.FC<DashboardContainerProps> = () => {
   const { changeContext } = useContext(AppContext);
   const [dataset, changeDataset] = useState(true);
-  const [theme, setTheme] = useState<Boolean>(true);
+  const [theme, setTheme] = useState<Boolean>(false);
   const d1 = [
     { name: 'Photo', value: 426 },
     { name: 'Status', value: 45 },

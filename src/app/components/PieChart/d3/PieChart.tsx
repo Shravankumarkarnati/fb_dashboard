@@ -1,29 +1,43 @@
-import { arc, pie, PieArcDatum, select } from 'd3';
 import React, { useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { PieChartD3Props } from './PieChart.utils';
-import './PiChart.d3.styles.scss';
-import Legend from '../../Legend/Legend';
-import Title from '../../Title';
+import {
+  arc,
+  pie,
+  PieArcDatum,
+  scaleOrdinal,
+  schemeCategory10,
+  select,
+} from 'd3';
+import styled from 'styled-components';
 import Summary from '../../Summary';
+import Title from '../../Title';
+import { PieChartD3Props } from './PieChart.utils';
+import uniqueId from '../../../utils/getUid';
+import Legend from '../../../Library/Legend/Legend';
+
+const PieChartContainer = styled.div<{ theme: 'dark' | 'light' }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid ${(props) => (props.theme !== 'dark' ? 'black' : 'white')};
+  background-color: ${(props) => (props.theme === 'dark' ? 'black' : 'white')};
+`;
 
 const PieChartD3: React.FC<PieChartD3Props> = ({
   data,
   height = 500,
   width = 500,
   outerRadius = 200,
-  innerRadius = 0,
+  innerRadius = 100,
   theme = 'light',
   legend = true,
 }) => {
-  const [primaryColor, secondaryColor] =
-    theme === 'light' ? ['black', 'white'] : ['white', 'black'];
-
+  const primaryColor = theme === 'light' ? 'black' : 'white';
   const pieChartSvgRef = useRef(null);
-  const colorPallate =
-    data.length === 4
-      ? ['#003f5c', '#7a5195', '#ef5675', '#ffa600']
-      : ['#550b5c', '#8d045f', '#be1c57', '#e34546', '#f9742e', '#ffa600'];
+
+  const colors = scaleOrdinal<number, string>()
+    .domain(data.map((cur) => cur.value))
+    .range(schemeCategory10);
 
   const pieChart = pie().value((d: any) => d.value)(data as any);
 
@@ -36,7 +50,7 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
     >,
     index: 0 | 1
   ) => {
-    const r = ((outerRadius + innerRadius) * 11) / 10;
+    const r = outerRadius * 1.1;
     const a = (d.startAngle + d.endAngle - Math.PI) / 2;
     const ans = [Math.cos(a) * r, Math.sin(a) * r];
     return ans[index];
@@ -52,7 +66,7 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
 
     const pieElement = svg
       .selectAll('.pie')
-      .data([uuidv4])
+      .data([uniqueId()])
       .join(
         (enter) =>
           enter
@@ -64,7 +78,7 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
       );
 
     const dataSelection = () => {
-      return uuidv4();
+      return uniqueId();
     };
 
     pieElement
@@ -79,7 +93,7 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
               arcs
                 .append('path')
                 .attr('d', arcGenerator)
-                .attr('fill', (_, index) => colorPallate[index])
+                .attr('fill', (d) => colors(d.value))
                 .attr('stroke', primaryColor)
                 .style('stroke-width', '2px')
             )
@@ -93,17 +107,6 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
                 .attr('stroke', primaryColor)
                 .attr('stroke-width', 1)
                 .attr('text-anchor', 'middle')
-            )
-            .call((arcs) =>
-              arcs
-                .append('text')
-                .text((d: any) => d.data.name)
-                .attr('class', 'arcs-text--name')
-                .attr('x', (d) => arcGenerator.centroid(d)[0])
-                .attr('y', (d) => arcGenerator.centroid(d)[1])
-                .attr('stroke', secondaryColor)
-                .attr('stroke-width', 1)
-                .attr('visibility', 'hidden')
             );
         },
         (update) => {
@@ -114,20 +117,21 @@ const PieChartD3: React.FC<PieChartD3Props> = ({
   }, [data]);
 
   return (
-    <div className="PieChartd3" style={{ backgroundColor: secondaryColor }}>
-      <div className="inner-container">
+    <PieChartContainer theme={theme}>
+      <div className="inner-container" style={{ display: 'flex' }}>
         <svg className="svg" ref={pieChartSvgRef} />
         {legend && (
           <Legend
             theme={theme}
-            colors={colorPallate}
             labels={data.map((cur) => cur.name)}
+            colors={data.map((cur) => colors(cur.value))}
+            shape="circle"
           />
         )}
       </div>
       <Title theme={theme} text="Pie Chart" />
       <Summary theme={theme} text="Shravan Kumar Karnati" />
-    </div>
+    </PieChartContainer>
   );
 };
 
